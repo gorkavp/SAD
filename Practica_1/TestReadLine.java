@@ -1,5 +1,3 @@
-//package Practica_1;
-
 import java.io.*;
 
 class TestReadLine {

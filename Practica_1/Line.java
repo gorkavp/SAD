@@ -1,5 +1,3 @@
-//package Practica_1;
-
 import java.util.*;
 
 public class Line {
@@ -7,115 +5,108 @@ public class Line {
     public static final char ESC = (char) 27;
     public static final String ESC_LEFT = ESC + "[D";
     public static final String ESC_RIGHT = ESC + "[C";
-    public static final String ESC_END = ESC + "[F";
     public static final String ESC_HOME = ESC + "[H";
+    public static final String ESC_END = ESC + "[F";
     public static final String ESC_INSERT = ESC + "[2~";
-    public static final String ESC_DEL = ESC + "[3~";
+    public static final String ESC_DELETE = ESC + "[3~";
     public static final String ESC_BACKSPACE = ESC + "[8~";
 
     private List<Character> buffer;
     private int column;
-    private boolean insert;
 
     public Line() {
-        this.column = 0;
-        this.insert = false;
-        this.buffer = new ArrayList<>();
+        column = 0;
+        buffer = new ArrayList<>();
     }
 
     public void add_character(char character) {
-
-        if (this.column == this.buffer.size()) {
-            this.buffer.add(character);
-            this.column++;
-        } else {
-            if (this.insert) {
-                this.buffer.set(this.column, character);
-            } else {
-                this.buffer.add(this.column, character);
+        if (column == buffer.size()) { // End of the line
+            buffer.add(character);
+            System.out.print(character);
+            column++;
+        } else { // Middle of the line
+            System.out.print(character);
+            column++;
+            int positions = 0;
+            for (int i = 0; i + column < buffer.size(); i++) { // Update terminal
+                System.out.print(buffer.get(i + column));
+                positions++;
             }
-            this.column++;
-            int moves = 0; // Update terminal
-            for (int i = 0; i + this.column < this.buffer.size(); i++) {
-                System.out.print(buffer.get(i + this.column));
-                moves++;
-            }
-            for (int i = 0; i < moves; i++) { // Put the cursor to the original position
+            for (int i = 0; i < positions; i++) { // Move the cursor to the original column
                 System.out.print(ESC_LEFT);
             }
         }
     }
 
     public void left() {
-        if (this.column > 0) {
-            this.column--;
+        if (column > 0) {
+            column--;
             System.out.print(ESC_LEFT);
         }
     }
 
     public void right() {
-        if (this.column < this.buffer.size()) {
-            this.column++;
+        if (column < buffer.size()) {
+            column++;
             System.out.print(ESC_RIGHT);
         }
     }
 
     public void delete() {
-        if (this.column < this.buffer.size()) {
-            this.buffer.remove(this.column);
+        if (column < buffer.size()) {
+            buffer.remove(column);
             int positions = 0;
-            for (int i = 0; i + this.column < this.buffer.size(); i++) {
-                System.out.print(this.buffer.get(i + this.column));
+            for (int i = 0; i + column < buffer.size(); i++) { // Update terminal
+                System.out.print(buffer.get(i + column));
                 positions++;
             }
             System.out.print(" ");
             positions++;
-            for (int i = 0; i < positions; i++) {
+            for (int i = 0; i < positions; i++) { // Move the cursor to the original column
                 System.out.print(ESC_LEFT);
             }
         }
     }
 
     public void backspace() {
-        if (this.column > 0) {
-            this.column--;
-            this.buffer.remove(this.column);
+        if (column > 0) {
+            column--;
+            buffer.remove(column);
             System.out.print(ESC_LEFT);
             int positions = 0;
-            for (int i = 0; i + this.column < this.buffer.size(); i++) {
-                System.out.print(this.buffer.get(i + this.column));
+            for (int i = 0; i + column < buffer.size(); i++) { // Update terminal
+                System.out.print(buffer.get(i + column));
                 positions++;
             }
             System.out.print(" ");
             positions++;
-            for (int i = 0; i < positions; i++) {
+            for (int i = 0; i < positions; i++) { // Move the cursor to the original column
                 System.out.print(ESC_LEFT);
             }
         }
     }
 
     public void insert() {
-        this.insert ^= true;
+
     }
 
     public void home() {
-        while (this.column > 0) {
+        while (column > 0) {
             this.left();
         }
     }
 
     public void end() {
-        while (this.column < this.buffer.size()) {
+        while (column < buffer.size()) {
             this.right();
         }
     }
 
     public String toString() {
-        StringBuilder sb = new StringBuilder(this.buffer.size());
-        for (Character character : this.buffer) {
-            sb.append(character);
+        StringBuilder str = new StringBuilder(buffer.size());
+        for (Character character : buffer) {
+            str.append(character);
         }
-        return sb.toString();
+        return str.toString();
     }
-
 }
