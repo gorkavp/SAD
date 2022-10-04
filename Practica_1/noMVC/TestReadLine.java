@@ -1,3 +1,5 @@
+package noMVC;
+
 import java.io.*;
 
 class TestReadLine {

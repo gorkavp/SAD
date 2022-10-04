@@ -1,3 +1,5 @@
+package noMVC;
+
 import java.util.*;
 
 public class Line {
@@ -13,10 +15,12 @@ public class Line {
 
     private List<Character> buffer;
     private int column;
+    private boolean insert_type;
 
     public Line() {
         column = 0;
         buffer = new ArrayList<>();
+        insert_type = false;
     }
 
     public void add_character(char character) {
@@ -25,6 +29,11 @@ public class Line {
             System.out.print(character);
             column++;
         } else { // Middle of the line
+            if (insert_type) {
+                buffer.set(column, character);
+            } else {
+                buffer.add(column, character);
+            }
             System.out.print(character);
             column++;
             int positions = 0;
@@ -87,7 +96,7 @@ public class Line {
     }
 
     public void insert() {
-
+        insert_type ^= true;
     }
 
     public void home() {
