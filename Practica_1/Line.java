@@ -91,12 +91,14 @@ public class Line {
     }
 
     public void home() {
+
         while (column > 0) {
             this.left();
         }
     }
 
     public void end() {
+
         while (column < buffer.size()) {
             this.right();
         }
