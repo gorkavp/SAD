@@ -4,16 +4,6 @@ import java.io.*;
 
 public class EditableBufferedReader extends BufferedReader {
 
-    public static final int CR = 13;
-    public static final int ESC = 27;
-    public static final int BACKSPACE = 127;
-    public static final int LEFT = -1;
-    public static final int RIGHT = -2;
-    public static final int HOME = -3;
-    public static final int END = -4;
-    public static final int INSERT = -5;
-    public static final int DELETE = -6;
-
     public EditableBufferedReader(Reader in) {
         super(in);
     }
@@ -40,24 +30,24 @@ public class EditableBufferedReader extends BufferedReader {
     public int read() throws IOException {
 
         int character = super.read();
-        if (character == ESC) {
+        if (character == Constants.INT_ESC) {
             character = super.read(); // Read '['
             character = super.read();
             switch (character) {
                 case 'D':
-                    return LEFT;
+                    return Constants.INT_LEFT;
                 case 'C':
-                    return RIGHT;
+                    return Constants.INT_RIGHT;
                 case 'H':
-                    return HOME;
+                    return Constants.INT_HOME;
                 case 'F':
-                    return END;
+                    return Constants.INT_HOME;
                 case '2':
                     character = super.read(); // Read '~'
-                    return INSERT;
+                    return Constants.INT_INSERT;
                 case '3':
                     character = super.read(); // Read '~'
-                    return DELETE;
+                    return Constants.INT_DELETE;
             }
         }
         return character;
@@ -70,39 +60,38 @@ public class EditableBufferedReader extends BufferedReader {
         int character = 0;
         Line line = new Line();
 
-        while (character != CR) {
+        while (character != Constants.INT_CR) {
             character = read();
-            if (character > LEFT && character != CR && character != BACKSPACE) {
+            if (character > Constants.INT_LEFT && character != Constants.INT_CR
+                    && character != Constants.INT_BACKSPACE) {
                 line.add_character((char) character);
             } else {
                 switch (character) {
-                    case LEFT:
+                    case Constants.INT_LEFT:
                         line.left();
                         break;
-                    case RIGHT:
+                    case Constants.INT_RIGHT:
                         line.right();
                         break;
-                    case HOME:
+                    case Constants.INT_HOME:
                         line.home();
                         break;
-                    case END:
+                    case Constants.INT_END:
                         line.end();
                         break;
-                    case INSERT:
+                    case Constants.INT_INSERT:
                         line.insert();
                         break;
-                    case DELETE:
+                    case Constants.INT_DELETE:
                         line.delete();
                         break;
-                    case BACKSPACE:
+                    case Constants.INT_BACKSPACE:
                         line.backspace();
                         break;
                 }
             }
         }
-
         unsetRaw();
         return line.toString();
     }
-
 }

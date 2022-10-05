@@ -4,116 +4,114 @@ import java.util.*;
 
 public class Line {
 
-    public static final char ESC = (char) 27;
-    public static final String ESC_LEFT = ESC + "[D";
-    public static final String ESC_RIGHT = ESC + "[C";
-    public static final String ESC_HOME = ESC + "[H";
-    public static final String ESC_END = ESC + "[F";
-    public static final String ESC_INSERT = ESC + "[2~";
-    public static final String ESC_DELETE = ESC + "[3~";
-    public static final String ESC_BACKSPACE = ESC + "[8~";
-
     private List<Character> buffer;
-    private int column;
+    private int current_column;
     private boolean insert_type;
 
     public Line() {
-        column = 0;
-        buffer = new ArrayList<>();
+        current_column = 0;
         insert_type = false;
+        buffer = new ArrayList<>();
     }
 
     public void add_character(char character) {
-        if (column == buffer.size()) { // End of the line
+
+        if (current_column == buffer.size()) { // End of the line
             buffer.add(character);
             System.out.print(character);
-            column++;
+            current_column++;
         } else { // Middle of the line
             if (insert_type) {
-                buffer.set(column, character);
+                buffer.set(current_column, character);
             } else {
-                buffer.add(column, character);
+                buffer.add(current_column, character);
             }
             System.out.print(character);
-            column++;
-            int positions = 0;
-            for (int i = 0; i + column < buffer.size(); i++) { // Update terminal
-                System.out.print(buffer.get(i + column));
-                positions++;
+            current_column++;
+            int position = 0;
+            while (position + current_column < buffer.size()) { // Update terminal
+                System.out.print(buffer.get(position + current_column));
+                position++;
             }
-            for (int i = 0; i < positions; i++) { // Move the cursor to the original column
-                System.out.print(ESC_LEFT);
+            for (int i = 0; i < position; i++) { // Move the cursor to the original column
+                System.out.print(Constants.STRING_LEFT);
             }
         }
     }
 
     public void left() {
-        if (column > 0) {
-            column--;
-            System.out.print(ESC_LEFT);
+
+        if (current_column > 0) {
+            current_column--;
+            System.out.print(Constants.STRING_LEFT);
         }
     }
 
     public void right() {
-        if (column < buffer.size()) {
-            column++;
-            System.out.print(ESC_RIGHT);
-        }
-    }
 
-    public void delete() {
-        if (column < buffer.size()) {
-            buffer.remove(column);
-            int positions = 0;
-            for (int i = 0; i + column < buffer.size(); i++) { // Update terminal
-                System.out.print(buffer.get(i + column));
-                positions++;
-            }
-            System.out.print(" ");
-            positions++;
-            for (int i = 0; i < positions; i++) { // Move the cursor to the original column
-                System.out.print(ESC_LEFT);
-            }
+        if (current_column < buffer.size()) {
+            current_column++;
+            System.out.print(Constants.STRING_RIGHT);
         }
-    }
-
-    public void backspace() {
-        if (column > 0) {
-            column--;
-            buffer.remove(column);
-            System.out.print(ESC_LEFT);
-            int positions = 0;
-            for (int i = 0; i + column < buffer.size(); i++) { // Update terminal
-                System.out.print(buffer.get(i + column));
-                positions++;
-            }
-            System.out.print(" ");
-            positions++;
-            for (int i = 0; i < positions; i++) { // Move the cursor to the original column
-                System.out.print(ESC_LEFT);
-            }
-        }
-    }
-
-    public void insert() {
-        insert_type ^= true;
     }
 
     public void home() {
 
-        while (column > 0) {
+        while (current_column > 0) {
             this.left();
         }
     }
 
     public void end() {
 
-        while (column < buffer.size()) {
+        while (current_column < buffer.size()) {
             this.right();
         }
     }
 
+    public void insert() {
+
+        this.insert_type ^= true;
+    }
+
+    public void delete() {
+
+        if (current_column < buffer.size()) {
+            buffer.remove(current_column);
+            int position = 0;
+            while (position + current_column < buffer.size()) { // Update terminal
+                System.out.print(buffer.get(position + current_column));
+                position++;
+            }
+            System.out.print(" ");
+            position++;
+            for (int i = 0; i < position; i++) { // Move the cursor to the original column
+                System.out.print(Constants.STRING_LEFT);
+            }
+        }
+    }
+
+    public void backspace() {
+
+        if (current_column > 0) {
+            current_column--;
+            buffer.remove(current_column);
+            System.out.print(Constants.STRING_LEFT);
+            int position = 0;
+            while (position + current_column < buffer.size()) { // Update terminal
+                System.out.print(buffer.get(position + current_column));
+                position++;
+            }
+            System.out.print(" ");
+            position++;
+            for (int i = 0; i < position; i++) { // Move the cursor to the original column
+                System.out.print(Constants.STRING_LEFT);
+            }
+        }
+    }
+
     public String toString() {
+
         StringBuilder str = new StringBuilder(buffer.size());
         for (Character character : buffer) {
             str.append(character);
