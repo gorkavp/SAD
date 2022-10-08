@@ -2,7 +2,7 @@ package MVC;
 
 import java.io.*;
 
-public class EditableBufferedReader extends BufferedReader {
+public class EditableBufferedReader extends BufferedReader { // Controller
 
     public EditableBufferedReader(Reader in) {
         super(in);
