@@ -1,6 +1,6 @@
 package noMVC;
 
-public abstract class Constants {
+public class Constants {
 
     public static final int INT_CR = 13;
     public static final int INT_ESC = 27;

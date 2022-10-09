@@ -7,14 +7,14 @@ public class Line extends Observable { // Model
     private List<Character> buffer;
     private int current_column;
     private boolean insert_type;
-    private final Console model;
+    private final Console view;
 
     public Line() {
         current_column = 0;
         insert_type = false;
         buffer = new ArrayList<>();
-        model = new Console();
-        this.addObserver(model);
+        view = new Console();
+        this.addObserver(view);
     }
 
     public List<Character> get_buffer() {
@@ -35,10 +35,10 @@ public class Line extends Observable { // Model
             buffer.set(current_column, character);
         } else {
             buffer.add(current_column, character);
+            current_column++;
         }
-        current_column++;
         this.setChanged();
-        this.notifyObservers(current_column - 1);
+        this.notifyObservers(character);
     }
 
     public void left() {

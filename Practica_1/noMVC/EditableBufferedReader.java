@@ -41,7 +41,7 @@ public class EditableBufferedReader extends BufferedReader {
                 case 'H':
                     return Constants.INT_HOME;
                 case 'F':
-                    return Constants.INT_HOME;
+                    return Constants.INT_END;
                 case '2':
                     character = super.read(); // Read '~'
                     return Constants.INT_INSERT;

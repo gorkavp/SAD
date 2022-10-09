@@ -4,18 +4,18 @@ import java.util.*;
 
 public class Console implements Observer { // View
 
-    @Override
     public void update(Observable o, Object arg) {
 
         int position = 0;
         int current_column = ((Line) o).get_current_column();
         List<Character> buffer = ((Line) o).get_buffer();
 
-        switch ((String) arg) {
+        switch (String.valueOf(arg)) {
 
             case Constants.STRING_LEFT:
                 System.out.print(Constants.STRING_LEFT);
                 break;
+
             case Constants.STRING_RIGHT:
                 System.out.print(Constants.STRING_RIGHT);
                 break;
@@ -46,7 +46,7 @@ public class Console implements Observer { // View
                 break;
 
             default: // add_character() method
-                System.out.print(buffer.get((int) arg));
+                System.out.print(arg);
                 while (position + current_column < buffer.size()) { // Update terminal
                     System.out.print(buffer.get(position + current_column));
                     position++;
