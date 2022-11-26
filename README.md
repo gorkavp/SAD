@@ -1,2 +1,2 @@
 # SAD
-Gorka Vila i Martin Calvo
+Gorka Vila Pérez i Martin Calvo
