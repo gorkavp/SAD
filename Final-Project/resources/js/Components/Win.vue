@@ -24,3 +24,21 @@
       </g>
     </svg>
   </template>
+
+  <style>
+.dollar-sign {
+  animation: turn 2s ease;
+  transform-origin: center;
+  transform-box: fill-box;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+@keyframes turn {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(2160deg);
+  }
+}
+</style>

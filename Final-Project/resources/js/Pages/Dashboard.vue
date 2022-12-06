@@ -2,10 +2,15 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import TitleScreen from '@/components/TitleScreen.vue'
+import Sidebar from '@/components/SideBar.vue'
+import Stars from '@/components/Stars.vue'
+import GameArea from '@/components/GameArea.vue'
+import MenuButton from '@/components/MenuButton.vue'
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Dashboardd" />
 
     <AuthenticatedLayout>
         <template #header>
