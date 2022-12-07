@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Decision extends Model
+class Message extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'decision',
-        'roomID',    
+        'content',
+        'chat_id',  
     ];
 
     public function user() {
-        return $this->belongsTo("App\Models\User");
+        return $this->belongsTo(User::class);
     }
-    public function room() {
-        return $this->belongsTo("App\Models\GameRoom");
+    public function chat() {
+        return $this->belongsTo(Chat::class);
     }
 }

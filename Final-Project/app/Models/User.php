@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -42,11 +44,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function rooms() {
-        return $this->belongsToMany("App\Models\GameRoom");
+    public function chats() {
+        return $this->belongsToMany(Chat::class);
     }
 
-    public function decisions() {
-        return $this->hasMany("App\Models\Decision");
+    public function messages() {
+        return $this->hasMany(Message::class);
     }
 }

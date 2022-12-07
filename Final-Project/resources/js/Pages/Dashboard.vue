@@ -1,23 +1,16 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/inertia-vue3';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TitleScreen from '@/components/TitleScreen.vue'
-import Sidebar from '@/components/SideBar.vue'
-import Stars from '@/components/Stars.vue'
-import GameArea from '@/components/GameArea.vue'
-import MenuButton from '@/components/MenuButton.vue'
+import { Head, Link } from '@inertiajs/inertia-vue3';
 </script>
 
 <template>
-    <Head title="Dashboardd" />
+    <Head title="Dashboard" />
 
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Blackjack</h2>
         </template>
-        <PrimaryButton class="ml-4 mt-52">
-            Stand
-        </PrimaryButton>
+        <Link :href="route('gameroom')" class="grid place-items-center h-screen underline">Game Room </Link>
+        
     </AuthenticatedLayout>
 </template>
