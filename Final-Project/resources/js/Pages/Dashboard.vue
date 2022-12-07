@@ -8,9 +8,8 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Blackjack</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
         </template>
-        <Link :href="route('gameroom')" class="grid place-items-center h-screen underline">Game Room </Link>
         
     </AuthenticatedLayout>
 </template>
