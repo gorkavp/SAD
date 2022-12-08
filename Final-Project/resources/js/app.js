@@ -1,6 +1,6 @@
 import './bootstrap';
 import '../css/app.css';
-import './chat';
+//import './chat';
 //import 'https://use.fontawesome.com/releases/v5.0.13/js/all.min.js';
 
 import { createApp, h } from 'vue';
