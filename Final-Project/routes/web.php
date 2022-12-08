@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\GameRoomController;
+use App\Http\Controllers\ChatController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,11 +28,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/gameroom', function () {
-    return Inertia::render('GameRoom');
-})->middleware(['auth', 'verified'])->name('gameroom');
-
-Route::post('/decision',[DecisionController::class, 'sent'])->name('decision.sent');
+Route::get('/chat',[ChatController::class, 'show'])->name('chat.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

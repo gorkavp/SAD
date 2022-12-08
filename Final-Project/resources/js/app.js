@@ -1,19 +1,15 @@
 import './bootstrap';
 import '../css/app.css';
+import './chat';
+//import 'https://use.fontawesome.com/releases/v5.0.13/js/all.min.js';
 
 import { createApp, h } from 'vue';
-import { createStore } from 'vuex';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
-const store = createStore({
-    modules: {
-  
-    }
-  })
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -22,7 +18,6 @@ createInertiaApp({
         return createApp({ render: () => h(app, props) })
             .use(plugin)
             .use(ZiggyVue, Ziggy)
-            .use(store)
             .mount(el);
     },
 });

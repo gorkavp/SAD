@@ -11,17 +11,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
-class GameRoomController extends Controller
+class ChatController extends Controller
 {
 
     public function __construct() {
         $this->middleware('auth');
     }
     
-    public function show(GameRoom $gameroom) {
-        abort_unless($gameroom->users->contains(auth()->id()), 403);
-        return Inertia::render('GameRoom', [
-            'gameroom' => $gameroom,
-        ]);
+    public function show() {
+        //abort_unless($gameroom->users->contains(auth()->id()), 403);
+        return Inertia::render('Chat');
     }
 }
