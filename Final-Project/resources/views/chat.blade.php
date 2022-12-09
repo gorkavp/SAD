@@ -213,38 +213,35 @@
           </form>
       </section>
       <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
       <script>
           const msgerForm = get(".msger-inputarea");
           const msgerInput = get(".msger-input");
           const msgerChat = get(".msger-chat");
-
-          const BOT_MSGS = [
-              "Hi, how are you?",
-              "Ohh... I can't understand what you trying to say. Sorry!",
-              "I like to play games... But I don't know how to play!",
-              "Sorry if my answers are not relevant. :))",
-              "I feel sleepy! :("
-          ];
-
-          // Icons made by Freepik from www.flaticon.com
-          const BOT_IMG = "";
+          const chatWith = get(".chatWith");
+          const typing = get(".typing");
+          const chatStatus = get(".chatStatus");
           const PERSON_IMG = "";
-          const BOT_NAME = "BOT";
-          const PERSON_NAME = "Tinus";
 
           msgerForm.addEventListener("submit", event => {
               event.preventDefault();
-
               const msgText = msgerInput.value;
               if (!msgText) return;
-
-              appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+              axios.post('/message/sent', {
+                  message: msgText,
+                  chat_id: 1
+              }).then(res => {
+                  let data = res.data;
+                  appendMessage("data.user.name", PERSON_IMG, "right", data.content, formatDate(new Date(data
+                      .created_at)));
+              }).catch(err => {
+                  console.log("Ha ocurrido un error");
+                  console.log(err);
+              });
               msgerInput.value = "";
-
-              botResponse();
           });
 
-          function appendMessage(name, img, side, text) {
+          function appendMessage(name, img, side, text, date) {
               //   Simple solution for small apps
               const msgHTML = `
             <div class="msg ${side}-msg">
@@ -253,7 +250,7 @@
               <div class="msg-bubble">
                 <div class="msg-info">
                   <div class="msg-info-name">${name}</div>
-                  <div class="msg-info-time">${formatDate(new Date())}</div>
+                  <div class="msg-info-time">${date}</div>
                 </div>
 
                 <div class="msg-text">${text}</div>
@@ -264,31 +261,18 @@
               msgerChat.insertAdjacentHTML("beforeend", msgHTML);
               msgerChat.scrollTop += 500;
           }
-
-          function botResponse() {
-              const r = random(0, BOT_MSGS.length - 1);
-              const msgText = BOT_MSGS[r];
-              const delay = msgText.split(" ").length * 100;
-
-              setTimeout(() => {
-                  appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
-              }, delay);
-          }
-
           // Utils
           function get(selector, root = document) {
               return root.querySelector(selector);
           }
 
           function formatDate(date) {
+              const d = date.getDate();
+              const m0 = date.getMonth() + 1;
+              const y = date.getFullYear();
               const h = "0" + date.getHours();
               const m = "0" + date.getMinutes();
-
-              return `${h.slice(-2)}:${m.slice(-2)}`;
-          }
-
-          function random(min, max) {
-              return Math.floor(Math.random() * (max - min) + min);
+              return `${d}/${mo}/${y} ${h.slice(-2)}:${m.slice(-2)}`;
           }
       </script>
   </body>

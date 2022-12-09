@@ -28,7 +28,11 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/chat',[ChatController::class, 'show'])->name('chat.show');
+Route::get('/chat/{chat}',[ChatController::class, 'show'])->name('chat.show');
+
+Route::get('chat/with/{user}', [ChatController::class, 'chat_with'])->name('chat.with');
+
+Route::post('message/sent', [MessageController::class, 'sent'])->name('message.sent');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
