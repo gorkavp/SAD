@@ -20,6 +20,7 @@ class ChatController extends Controller
     
     public function show() {
         //abort_unless($gameroom->users->contains(auth()->id()), 403);
-        return Inertia::render('Chat');
+        //return Inertia::render('Chat');
+        return view('chat');
     }
 }
