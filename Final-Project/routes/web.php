@@ -1,10 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ChatController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,26 +14,33 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-    ]);
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('/chat/{chat}',[ChatController::class, 'show'])->name('chat.show');
+require __DIR__.'/auth.php';
 
-Route::get('chat/with/{user}', [ChatController::class, 'chat_with'])->name('chat.with');
+Route::get('auth/user', function () {
 
-Route::post('message/sent', [MessageController::class, 'sent'])->name('message.sent');
+	if(auth()->check()){
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+		return response()->json([
+			'authUser' => auth()->user()
+		]);
+	}
+	return null;
+
 });
 
-require __DIR__ . '/auth.php';
+Route::get('chat/{chat}', 'App\Http\Controllers\ChatController@show')->name('chat.show');
+
+Route::get('chat/with/{user}', 'App\Http\Controllers\ChatController@chat_with')->name('chat.with');
+
+Route::get('chat/{chat}/get_users', 'App\Http\Controllers\ChatController@get_users')->name('chat.get_users');
+
+Route::get('chat/{chat}/get_messages', 'App\Http\Controllers\ChatController@get_messages')->name('chat.get_messages');
+
+Route::post('message/sent', '\App\Http\Controllers\MessageController@sent')->name('message.sent');

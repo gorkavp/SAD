@@ -29,8 +29,8 @@ return [
             'secret' => env('PUSHER_APP_SECRET'),
             'path' => env('PUSHER_APP_PATH'),
             'capacity' => null,
-            'enable_client_messages' => false,
-            'enable_statistics' => false,
+            'enable_client_messages' => true,
+            'enable_statistics' => true,
         ],
     ],
 
@@ -59,7 +59,7 @@ return [
     /*
      * This path will be used to register the necessary routes for the package.
      */
-    'path' => 'laravel-websockets',
+    'path' => 'admin/websockets',
 
     /*
      * Dashboard Routes Middleware
@@ -138,4 +138,5 @@ return [
      * `ChannelManager` interface provided by this package.
      */
     'channel_manager' => \BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManagers\ArrayChannelManager::class,
+    
 ];

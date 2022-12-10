@@ -3,22 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Events\MessageSent;
 
 class MessageController extends Controller
 {
-    public function __construct() {
+    
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
 
-        $this->middleware('auth');
-    }
-    public function sent(Request $request) {
 
-        $message = auth()->user()->messages()->create([
-            'content' => $request->message,
-            'chat_id' => $request->chat_id,
-        ]);->load('user');
+	public function sent(Request $request)
+	{
 
-        //broadcast(new messageMade($message))->toOthers();
+		$message = auth()->user()->messages()->create([
+			'message' => $request->message,
+			'chat_id' => $request->chat_id
+		])->load('user');
 
-        return $message;
-    }
+		broadcast(new MessageSent($message))->toOthers();
+
+		return $message;
+
+	}
+
 }
