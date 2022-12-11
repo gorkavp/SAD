@@ -18,7 +18,7 @@
             <div class="msger-header-title">
                 <i class="fas fa-comment-alt"></i>
                 <span class="chatWith"></span>
-                <span class="typing" style="display: none;"> está escribiendo</span>
+                <span class="typing" style="display: none;"> is typing</span>
             </div>
             <div class="msger-header-options">
                 <span class="chatStatus offline">

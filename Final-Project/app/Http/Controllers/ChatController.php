@@ -30,12 +30,11 @@ class ChatController extends Controller
 		if(!$chat)
 		{
 
-			$chat = \App\Models\Chat::create([]);
+			$chat = Chat::create([]);
 
 			$chat->users()->sync([$user_a->id, $user_b->id]);
 
 		}
-
 		return redirect()->route('chat.show', $chat);
 
 	}

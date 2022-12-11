@@ -1,7 +1,7 @@
 const msgerForm = get(".msger-inputarea");
 const msgerInput = get(".msger-input");
 const msgerChat = get(".msger-chat");
-const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
+const PERSON_IMG = "./avatar-svgrepo-com.svg";
 const chatWith = get(".chatWith");
 const typing = get(".typing");
 const chatStatus = get(".chatStatus");
@@ -202,3 +202,9 @@ function sendTypingEvent()
   {
     msgerChat.scrollTop = msgerChat.scrollHeight;
   }
+
+function myfunction() {
+  const dashInput = get(".msger-input");
+  window.location.href = 'http://localhost:8000/chat/with/' + dashInput.value;
+  return false;
+}

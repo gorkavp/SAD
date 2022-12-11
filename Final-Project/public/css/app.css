@@ -182662,4 +182662,9 @@ select {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
-
+.msger-send-btn {
+border-style: solid;
+border: 1px solid #b32424;
+padding: 8px;
+background-color: bisque;
+}

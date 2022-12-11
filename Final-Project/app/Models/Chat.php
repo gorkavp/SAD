@@ -11,12 +11,12 @@ class Chat extends Model
 
     public function users()
     {
-    	return $this->belongsToMany('App\Models\User');
+    	return $this->belongsToMany(User::class);
     }
 
     public function messages() 
     {
-    	return $this->hasMany('App\Models\Message');
+    	return $this->hasMany(Message::class);
     }
 
 }
