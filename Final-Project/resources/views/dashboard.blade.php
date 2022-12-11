@@ -15,7 +15,8 @@
             <div style="margin-top: 18px">
                 <form class="msger-inputarea" method="get">
                     <input type="text" id="user_id" class="msger-input" placeholder="user_id">
-                    <button type="submit" class="msger-send-btn" onclick="myfunction()">Chat</button>
+                    <button type="submit" style="background-color: bisque" class="msger-send-btn"
+                        onclick="myfunction()">Chat</button>
                 </form>
             </div>
         </div>
