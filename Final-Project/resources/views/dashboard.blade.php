@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Welcome to ChatApp!') }}
+            {{ __('Welcome to YowChat!') }}
         </h2>
     </x-slot>
 
@@ -15,8 +15,7 @@
             <div style="margin-top: 18px">
                 <form class="msger-inputarea" method="get">
                     <input type="text" id="user_id" class="msger-input" placeholder="user_id">
-                    <button type="submit" style="background-color: bisque" class="msger-send-btn"
-                        onclick="myfunction()">Chat</button>
+                    <button type="submit" class="btnChat" onclick="myfunction()">Chat</button>
                 </form>
             </div>
         </div>

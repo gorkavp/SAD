@@ -18,6 +18,18 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/chat.js') }}" defer></script>
     <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
+
+    <style type="text/css">
+        .btnChat {
+            background-color: bisque;
+            padding: 0.6rem;
+        }
+
+        .btnChat:hover {
+            background-color: #b87c7c;
+        }
+    </style>
+
 </head>
 
 <body class="font-sans antialiased">
