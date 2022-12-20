@@ -361,7 +361,7 @@
         @media (prefers-color-scheme:dark) {
             .dark\:bg-gray-800 {
                 --bg-opacity: 1;
-                background-color: #2d3748;
+                background-color: #1a1c3d;
                 background-color: rgba(45, 55, 72, var(--bg-opacity))
             }
 
@@ -403,7 +403,7 @@
     <div
         class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
         <div>
-            <p style="font-size: 30px;"><span style="color: rgb(0, 0, 0); color:crimson">Yow</span><span
+            <p style="font-size: 100px;"><span style="color: rgb(0, 0, 0); color:crimson">Yow</span><span
                     style="color: green;">Chat</span></p>
         </div>
         @if (Route::has('login'))
