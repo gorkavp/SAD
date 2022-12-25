@@ -1,15 +1,27 @@
-package Practica_2.server;
+package Practica_3.server;
 
 import java.io.*;
 import java.net.*;
+import java.util.concurrent.ConcurrentHashMap;
+import javax.swing.*;
 
 public class Server {
-    public static void main(String[] args) {
 
-        // args[0] = port
-        try (MyServerSocket server_socket = new MyServerSocket(Integer.parseInt(args[0]))) {
+    public static ConcurrentHashMap<String, String> content = new ConcurrentHashMap<>();
+    private JTextArea messages;
+    private DefaultListModel<String> users_list;
 
-            System.out.println("Server listening on port " + server_socket.getLocalPort());
+    public Server(JTextArea messages, DefaultListModel<String> users_list) {
+
+        this.messages = messages;
+        this.users_list = users_list;
+    }
+
+    public void ServerLauncher(int port) {
+
+        try (MyServerSocket server_socket = new MyServerSocket(port)) {
+
+            messages.append("Server is listening on port " + port + "\n");
 
             new Thread(new Runnable() { // Thread to send the messages written by the server to the clients
                 @Override
@@ -17,7 +29,14 @@ public class Server {
 
                     try {
 
-                        server_socket.text_console();
+                        while (true) {
+
+                            if (!content.isEmpty()) {
+
+                                server_socket.write_all("ADMIN: " + content.get("key"));
+                                content.remove("key");
+                            }
+                        }
 
                     } catch (IOException exception) { // If there is an error, print the stack trace
 
@@ -36,23 +55,30 @@ public class Server {
                 // add_user() returns true if the username is not in use
                 if (server_socket.add_user(username, user_socket)) {
 
-                    System.out.println("User " + username + " connected");
-                    server_socket.write_all(username + " has joined the chat");
+                    this.users_list.addElement(username);
+                    server_socket.notify_users_connected(username);
+                    server_socket.write_allLessOne(username, username + " has joined the chat");
 
                     new Thread(new Runnable() { // Thread to read the messages from the clients
-
                         @Override
                         public void run() { // run() is the method that is executed when the thread is started
 
                             try {
 
-                                server_socket.text_client_to_server(username);
+                                String content; // Variable to store the text read from the client
+                                // Check if the client has sent a message
+                                while ((content = server_socket.read_client(username)) != null) {
+
+                                    messages.append(username + ": " + content + "\n");
+                                    server_socket.write_allLessOne(username, username + ": " + content);
+                                }
+
                                 server_socket.delete_user(username);
+                                users_list.removeElement(username);
 
                             } catch (IOException exception) { // If there is an error, print the stack trace
 
-                                System.out.println(username + " has left the chat");
-
+                                exception.printStackTrace();
                             }
                         }
                     }).start(); // Start the thread
@@ -69,7 +95,6 @@ public class Server {
         } catch (IOException exception) { // If there is an error, print the stack trace
 
             exception.printStackTrace();
-
         }
     }
 }

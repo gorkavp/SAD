@@ -1,4 +1,4 @@
-package MVC;
+package Practica_1.MVC;
 
 import java.util.*;
 

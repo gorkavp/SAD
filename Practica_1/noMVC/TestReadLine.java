@@ -1,4 +1,4 @@
-package noMVC;
+package Practica_1.noMVC;
 
 import java.io.*;
 

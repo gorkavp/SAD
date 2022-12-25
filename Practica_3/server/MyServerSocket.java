@@ -1,4 +1,4 @@
-package Practica_2.server;
+package Practica_3.server;
 
 import java.io.*;
 import java.net.*;
@@ -122,5 +122,15 @@ public class MyServerSocket extends ServerSocket {
             this.write_allLessOne(username, username + ": " + text);
             text = this.read_client(username); // Read the next message
         }
+    }
+
+    // Method to notify to a user the usernames of the other users connected
+    public void notify_users_connected(String username) throws IOException {
+
+        StringBuilder string = new StringBuilder(); // Create a StringBuilder to store the username
+        for (Map.Entry<String, Socket> entry : this.connections.entrySet()) {
+            string.append(entry.getKey() + " "); // Append the username to the string
+        }
+        write_client(username, string.toString());
     }
 }

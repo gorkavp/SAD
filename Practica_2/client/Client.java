@@ -10,7 +10,6 @@ public class Client {
         try (MySocket user_socket = new MySocket(args[0], Integer.parseInt(args[1]), args[2])) {
 
             new Thread(new Runnable() { // New thread to send the messages written by the client to the server
-
                 @Override
                 public void run() { // run() is the method that is executed when the thread is started
 
@@ -30,7 +29,7 @@ public class Client {
 
         } catch (UnknownHostException exception) { // If there is an error, print the stack trace
 
-            System.out.println("Unknown host: " + args[0]);
+            exception.printStackTrace();
 
         } catch (IOException exception) { // If there is an error, print the stack trace
 

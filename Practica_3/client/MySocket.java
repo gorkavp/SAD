@@ -1,4 +1,4 @@
-package Practica_2.client;
+package Practica_3.client;
 
 import java.io.*;
 import java.net.*;
@@ -36,6 +36,18 @@ public class MySocket extends Socket {
         this.writer.println(username); // Write the username to the socket
     }
 
+    // Method to read the input from the server
+    public String read_socket() throws IOException {
+
+        return this.reader.readLine(); // return the text read from the socket
+    }
+
+    // Method to write to the server
+    public void write_socket(String content) {
+
+        this.writer.println(content); // Write the output to the socket
+    }
+
     // Method to read what is written in the console to send it
     public void text_console_to_server() throws IOException {
 
@@ -48,7 +60,7 @@ public class MySocket extends Socket {
         }
     }
 
-    // Method to read the messages from the server
+    // Method to read the messages from the server and print them
     public void text_server_to_client() throws IOException {
 
         String text = this.reader.readLine(); // readLine() reads a line of text

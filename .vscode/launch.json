@@ -1,52 +1,96 @@
 {
-    // Use IntelliSense para saber los atributos posibles.
-    // Mantenga el puntero para ver las descripciones de los existentes atributos.
-    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "java",
-            "name": "Launch Current File",
-            "request": "launch",
-            "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "Launch TestReadLine",
-            "request": "launch",
-            "mainClass": "MVC.TestReadLine",
-            "projectName": "SAD_8167e20f"
-        },
-        {
-            "type": "java",
-            "name": "Launch TestReadLine(1)",
-            "request": "launch",
-            "mainClass": "noMVC.TestReadLine",
-            "projectName": "SAD_8167e20f"
-        },
-        {
-            "type": "java",
-            "name": "Launch Client",
-            "request": "launch",
-            "args": ["localhost", "5000", "Gorka"],
-            "mainClass": "Practica_2.client.Client",
-            "projectName": "SAD_8167e20f"
-        },
-        {
-            "type": "java",
-            "name": "Launch Client2",
-            "request": "launch",
-            "args": ["localhost", "5000", "Tinus"],
-            "mainClass": "Practica_2.client.Client",
-            "projectName": "SAD_8167e20f"
-        },
-        {
-            "type": "java",
-            "name": "Launch Server",
-            "request": "launch",
-            "args": ["5000"],
-            "mainClass": "Practica_2.server.Server",
-            "projectName": "SAD_8167e20f"
-        }
-    ]
+  // Use IntelliSense para saber los atributos posibles.
+  // Mantenga el puntero para ver las descripciones de los existentes atributos.
+  // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    },
+    {
+      "type": "java",
+      "name": "Launch noMVCTestReadLine",
+      "request": "launch",
+      "mainClass": "MVC.TestReadLine",
+      "projectName": "SAD_46ab2f98"
+    },
+    {
+      "type": "java",
+      "name": "Launch MVCTestReadLine",
+      "request": "launch",
+      "mainClass": "noMVC.TestReadLine",
+      "projectName": "SAD_46ab2f98"
+    },
+    {
+      "type": "java",
+      "name": "Launch P2Client1",
+      "request": "launch",
+      "args": [
+        "localhost",
+        "5000",
+        "Gorka"
+      ],
+      "mainClass": "Practica_2.client.Client",
+      "projectName": "SAD_46ab2f98"
+    },
+    {
+      "type": "java",
+      "name": "Launch P2Client2",
+      "request": "launch",
+      "args": [
+        "localhost",
+        "5000",
+        "Tinus"
+      ],
+      "mainClass": "Practica_2.client.Client",
+      "projectName": "SAD_46ab2f98"
+    },
+    {
+      "type": "java",
+      "name": "Launch P2Server",
+      "request": "launch",
+      "args": [
+        "5000"
+      ],
+      "mainClass": "Practica_2.server.Server",
+      "projectName": "SAD_46ab2f98"
+    },
+    {
+      "type": "java",
+      "name": "Launch P3Client1",
+      "request": "launch",
+      "args": [
+        "localhost",
+        "5000",
+        "Gorka"
+      ],
+      "mainClass": "Practica_3.client.ClientChat",
+      "projectName": "SAD_46ab2f98"
+    },
+    {
+      "type": "java",
+      "name": "Launch P3Client2",
+      "request": "launch",
+      "args": [
+        "localhost",
+        "5000",
+        "Tinus"
+      ],
+      "mainClass": "Practica_3.client.ClientChat",
+      "projectName": "SAD_46ab2f98"
+    },
+    {
+      "type": "java",
+      "name": "Launch P3Server",
+      "request": "launch",
+      "args": [
+        "5000"
+      ],
+      "mainClass": "Practica_3.server.ServerChat",
+      "projectName": "SAD_46ab2f98"
+    },
+  ]
 }
